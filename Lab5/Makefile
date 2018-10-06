@@ -1,5 +1,5 @@
 # list all binaries in this next line
-BINARIES = vol1 vol2 vol3 volEmpty
+BINARIES = vol1 vol2 vol3 volEmpty volSIMD
 CCOPTS = -g -O3
 
 all:	${BINARIES}
@@ -16,6 +16,9 @@ vol3:	vol3.c vol.h
 volEmpty: volEmpty.c vol.h
 	gcc	${CCOPTS} volEmpty.c -o volEmpty
 
+volSIMD: volSIMD
+	gcc ${CCOPTS} volSIMD.c -o volSIMD
+
 test1:	vol1
 	bash -c "time ./vol1"
 
@@ -27,8 +30,11 @@ test3:	vol3
 
 testEmpty: volEmpty
 	bash -c "time ./volEmpty"
+
+testSIMD:
+	bash -c "time ./volSIMD"
 # target to test all binaries
-test:	test1 test2 test3
+test:	${BINARIES}
 
 gdb1:	vol1
 	gdb vol1

@@ -13,21 +13,26 @@ _start:
 loop:
     /* ... body of the loop ... do something useful here ... */
 
-	/* tens digit */
+	
 	movq 	$zero, %rdx			/* move zero into %rdx, this is needed for the division*/
 	movq	%r15, %rax			/* move index into %rax */
 	movq 	$divisor, %r10		/* move divisor into register 10*/
 	div		%r10				/* divide rax by register 10 */
 
-	movb 	$offset, %bl		/*mov offset into register b*/
+	movq    $zero, %rcx
+	cmp     %rax, %rcx
+	je      ones
 
+	movb 	$offset, %bl		/*mov offset into register b*/
+	/* tens digit */
 	add 	%rax, %rbx			/* add offset and division result */
 	mov 	%bl, msg + 6		/* move into position */ 
 
+ones:
 	/* ones digit */
 	movb 	$offset, %bl		
 	add		%rdx,%rbx			/* add offset and division remainder */
-	mov     %bl, msg + 7		/* move into position */s
+	mov     %bl, msg + 7		/* move into position */
 
 	movq	$len,%rdx
 	movq 	$msg,%rsi
@@ -45,6 +50,5 @@ loop:
     syscall
 
 .section .data
-
 msg: .ascii 	"Loop:   \n"
 	len = . - msg

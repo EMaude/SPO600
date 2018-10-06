@@ -1,4 +1,4 @@
-BINARIES=loop loop_num loopEx
+BINARIES=loop loop_num loopEx loopF
 
 all:	${BINARIES}
 AS_ARGS=-g
@@ -14,6 +14,11 @@ loop_num: 	loop_num.s
 loopEx:		loopEx.s
 		as 	${AS_ARGS}	-o loopEx.o	loopEx.s
 		ld			-o loopEx	loopEx.o
+
+loopF:		loopF.s
+		as 	${AS_ARGS}	-o loopF.o	loopF.s
+		ld			-o loopF loopF.o
+
 
 clean:	
 		rm ${BINARIES} *.o || true
