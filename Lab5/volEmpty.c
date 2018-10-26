@@ -28,19 +28,7 @@ int main() {
 		in[x] = (rand()%65536)-32768;
 	}
 
-//VOL2 TESTS//
-	//make a precalculated array
-	// int16_t precal[65536];
-	// for(int j = 0; j < 65536; j++)
-	// {
-	// 	precal[j] = scale_sample(j - 32768, 0.75);
-	// }
 
-	// ######################################
-	// This is the interesting part!
-	// Scale the volume of all of the samples
-	
-	// ######################################
 
 	// Sum up the data
 	for (x = 0; x < SAMPLES; x++) {

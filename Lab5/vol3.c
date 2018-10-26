@@ -7,7 +7,7 @@
 // in the range of 0.00 to 1.00.
 static inline int16_t scale_sample(int16_t sample, float volume_factor) {
 	int volume_factor_s = 256/volume_factor;
-	return (volume_factor_s *  sample) >> 8;
+	return (volume_factor_s * sample) >> 8;
 }
 
 int main() {

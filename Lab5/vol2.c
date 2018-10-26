@@ -3,10 +3,17 @@
 #include <stdint.h>
 #include "vol.h"
 
+int16_t precal[65536];
+
 // Function to scale a sound sample using a volume_factor
 // in the range of 0.00 to 1.00.
 static inline int16_t scale_sample(int16_t sample, float volume_factor) {
 	return (int16_t) (volume_factor * (float) sample);
+}
+
+static inline int16_t precal_scale_sample(int16_t sample)
+{
+	return precal[sample + 32768];
 }
 
 int main() {
@@ -29,7 +36,7 @@ int main() {
 	}
 
 	//make a precalculated array
-	int16_t precal[65536];
+	
 	for(int j = 0; j < 65536; j++)
 	{
 		precal[j] = scale_sample(j - 32768, 0.75);
@@ -39,7 +46,7 @@ int main() {
 	// This is the interesting part!
 	// Scale the volume of all of the samples
 	for (x = 0; x < SAMPLES; x++) {
-		out[x] = precal[in[x] + 32768];
+		out[x] = precal_scale_sample(in[x]);
 	}
 	// ######################################
 
