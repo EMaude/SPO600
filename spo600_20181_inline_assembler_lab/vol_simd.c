@@ -79,17 +79,10 @@ int main() {
 	// Q: are the results usable? are they correct?
 	printf("Result: %d\n", ttl);
 
-
-	ttl = 0;
-
-	printf("Summing pre scale samples.\n");
-	for (x = 0; x < SAMPLES; x++) {
-		ttl=(ttl+in[x])%1000;
-	}
-
-	ttl *= 0.75;
-
-	printf("Result: %d\n", ttl);
+	//To find out if the results are usable figure out the scale of one of the samples
+	printf("Input: %d\n", in[10]);
+	printf("Output: %d\n", out[10]);
+	printf("Diff: %d\n", (out[10]/in[10]));
 
 	return 0;
 
